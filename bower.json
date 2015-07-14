@@ -1,0 +1,17 @@
+{
+    "name": "query",
+    "version": "0.2.1",
+    "authors": [
+        "Aaron P. <haiyang.phy@alibaba-inc.com>"
+    ],
+    "description": "dom operator for green browser",
+    "main": "release/query.js",
+    "license": "MIT",
+    "homepage": "http://git.ucweb.local/pffe/query/tree/master",
+    "dependencies": {},
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components"
+    ]
+}

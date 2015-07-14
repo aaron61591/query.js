@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>UC Activity Component query</title>
+    <style type="text/css">
+    </style>
+</head>
+
+<body>
+    <h1>cmp-query</h1>
+    <div id="div-test"></div>
+    <script type="text/javascript" src="src/query.js"></script>
+    <script type="text/javascript" src="src/promise.js"></script>
+    <script type="text/javascript" src="src/method.js"></script>
+    <script type="text/javascript" src="src/generator.js"></script>
+    <script type="text/javascript" src="src/cache.js"></script>
+    <script type="text/javascript" src="src/methods/attribute.js"></script>
+    <script type="text/javascript" src="src/methods/node.js"></script>
+    <script type="text/javascript" src="src/methods/class.js"></script>
+    <script type="text/javascript" src="src/methods/display.js"></script>
+    <script type="text/javascript" src="src/methods/event.js"></script>
+    <script type="text/javascript" src="src/methods/time.js"></script>
+    <script type="text/javascript" src="src/init.js"></script>
+    <script type="text/javascript">
+    $('#div-test')
+        .text('Loading...')
+        .delay(1000)
+        .text('')
+        .append($('<div id="msg-hello" class="msg-haha" style="color:red;">Hello QueryJs</div>'))
+        .delay(1000)
+        .hide()
+        .delay(1000)
+        .show();
+
+    $('body').insert($('<div>i am inserted</div>'), '#div-test');
+    </script>
+</body>
+
+</html>
