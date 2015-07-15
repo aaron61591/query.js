@@ -23,7 +23,7 @@ Run it:
 
     grunt
 
-Check it from browser:
+Check it:
 
     http://127.0.0.1:4000
     
@@ -31,35 +31,35 @@ Check it from browser:
 
 ### $(selectors)
 
-Create a Query Object
+Create a query object
 
 	$('#test') // query
 	$('<div class="test">test</div>') // query
 	
-### query.text([text])
+### query.text([text)
 
-operate innerText
+Operate innerText
 
 	$('#test').text('Hello QueryJs') // query
 	$('#test').text() // 'Hello QueryJs'
 	
 ### query.html([html])
 
-operate innerHTML
+Operate innerHTML
 
 	$('#test').html('<p>Hello QueryJs</p>') // query
 	$('#test').html() // '<p>Hello QueryJs</p>'
 	
 ### query.value([value])
 
-operate value
+Operate value
 
 	$('#input-name').value('my name') // query
 	$('#input-name').value() // 'my name'
 	
 ### query.style(attrName, [value])
 
-operate style
+Operate style
 
 	$('#test').style('width', '100px') // query
 	$('#test').style('width') // 100px
@@ -67,46 +67,46 @@ operate style
 	
 ### query.attr(attrName, [value])
 
-operate attr
+Operate attr
 
 	$('#test').attr('id') // test
 	$('#test').attr('width', '100') // query
 	
 ### query.class([class])
 
-operate class
+Operate class
 
 	$('.test').class() // test
 	$('#test').class('test') // query
 	
 ### query.addClass(class)
 
-add class to element
+Add class to element
 
 	$('#test').addClass('class1') // query
 	
 ### query.removeClass(class)
 
-remove class from element
+Remove class from element
 
 	$('#test').removeClass('class1') // query
 	
 ### query.show([display])
 
-show element
+Show element
 
 	$('#test').show() // query
 	$('#btn-test').show('inline-block') // query
 	
 ### query.hide()
 
-hide element
+Hide element
 
 	$('#test').hide() // query
 	
 ### query.on(event, listener, [useCapture])
 
-add a listener to element
+Add a listener to element
 
 	$('#test').on('click', fun1) // query
 	
@@ -118,37 +118,37 @@ remove a listener from element
 	
 ### query.append(query)
 
-append the specified element as a child of father elements
+Append the specified element as a child of father elements
 
 	$('#test').append($('<li id="opt2">option2</li>')) // query
 	
 ### query.insert(query, selectors)
 
-inserts the specified elements before a reference selectors
+Inserts the specified elements before a reference selectors
 
 	$('#test').insert($('<li id="opt1">option1</li>', '#opt2')) // query
 	
 ### query.empty()
 
-remove all children from the specified elements
+Remove all children from the specified elements
 
 	$('#test').empty() // query
 	
 ### query.find()
 
-get elements
+Get elements
 
 	$('.test').find() // [div.test, div.test, ...]
 	
 ### query.get()
 
-get element
+Get element
 
 	$('#test').get() // <div id="test"></div>
 	
 ### query.delay(time)
 
-executes next query function after a specified delay.
+Executes next query function after a specified delay.
 
 	$('#test')
 	.hide()
