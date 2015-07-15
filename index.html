@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta charset="utf-8">
+    <title>QueryJs</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+
+<body>
+    <section id="welcome">
+        <h1>QueryJs</h1>
+        <p>
+            Lightweight Batch DOM Operations
+            <br>for <span class="green">Green Browser</span>
+        </p>
+        <!-- <p class="author">by Aaron P.</p> -->
+    </section>
+    <section id="quick-start">
+        <div id="head">
+            <p>QUICKY DEMO</p>
+            <p id="msg-detail">Ball Game Develop</p>
+        </div>
+        <p>
+            <button id="burn">Burn</button>
+        </p>
+    </section>
+    <section id="demo"></section>
+    <section id="code">
+        <img src="code.png">
+    </section>
+    <footer>more</footer>
+    <script type="text/javascript" src="release/query-0.2.1.js"></script>
+    <!-- <script type="text/javascript" src="src/query.js"></script>
+    <script type="text/javascript" src="src/promise.js"></script>
+    <script type="text/javascript" src="src/method.js"></script>
+    <script type="text/javascript" src="src/generator.js"></script>
+    <script type="text/javascript" src="src/cache.js"></script>
+    <script type="text/javascript" src="src/methods/attribute.js"></script>
+    <script type="text/javascript" src="src/methods/node.js"></script>
+    <script type="text/javascript" src="src/methods/class.js"></script>
+    <script type="text/javascript" src="src/methods/display.js"></script>
+    <script type="text/javascript" src="src/methods/event.js"></script>
+    <script type="text/javascript" src="src/methods/time.js"></script>
+    <script type="text/javascript" src="src/init.js"></script> -->
+    <script type="text/javascript">
+    'use strict';
+
+    $('#welcome').on('touchstart', start);
+
+    function start() {
+
+        $('#welcome')
+            .style('opacity', 0)
+            .delay(500)
+            .hide();
+
+        $('#quick-start')
+            .style('-webkit-transform', 'translateY(40px)');
+
+        $('#head')
+            .style('margin:40px 0;font-size:20px;');
+
+        $('#msg-detail')
+            .show();
+
+        $('#burn')
+            .style('font-size:18px;background:#fff;width:140px;height:45px')
+            .show('inline-block')
+            .on('touchstart', function() {
+
+                $('#quick-start').hide();
+
+                var left = $('<button id="left">L</button>')
+                    .addClass('notice')
+                    .on('touchstart', handleLeft);
+
+                var right = $('<button id="right">R</button>')
+                    .addClass('notice')
+                    .on('touchstart', handleRight);
+
+                $('#demo')
+                    .append($('<div id="ball" style="width:150px;"></div>'))
+                    .append(left)
+                    .append(right);
+            });
+
+        $('#code')
+            .style('-webkit-transform:translateY(-220px);opacity:1;');
+
+        $('footer')
+            .show()
+            .on('touchstart', more);
+    }
+
+    function handleLeft() {
+
+        $('#ball')
+            .addClass('change')
+            .delay(1000)
+            .removeClass('change')
+            .style('width', down($('#ball').style('width')));
+    }
+
+    function handleRight() {
+
+        $('#ball')
+            .addClass('change')
+            .delay(1000)
+            .removeClass('change')
+            .style('width', up($('#ball').style('width')));
+    }
+
+    function down(width) {
+
+        width = width.replace('px', '');
+
+        return parseInt(width) - 20 + 'px';
+    }
+
+    function up(width) {
+
+        width = width.replace('px', '');
+
+        return parseInt(width) + 20 + 'px';
+    }
+
+    function more() {
+
+        window.location.href = 'https://github.com/aaron61591/query.js';
+    }
+    </script>
+</body>
+
+</html>

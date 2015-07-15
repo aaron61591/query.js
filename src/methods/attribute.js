@@ -13,19 +13,20 @@
         text: 'innerText',
         html: 'innerHTML',
         value: 'value',
-        class: 'className',
-        style: 'style'
+        class: 'className'
     };
 
     /**
      * get or set method
      */
-    Attribute._method = function (setter, getter, isSingle) {
+    Attribute._method = function (setter, getter, method) {
 
         return function (key, value) {
 
-            if (isSingle && key !== undefined ||
-                !isSingle && value !== undefined) {
+            if (method !== 'attr' && method !== 'style' && key !== undefined ||
+                method === 'attr' && value !== undefined ||
+                method === 'style' && value !== undefined ||
+                method === 'style' && value === undefined && !window.$.method._isSyncStyle(key)) {
                 window.$.method._exec(this, function (e) {
 
                     setter(e, key, value);
@@ -49,7 +50,82 @@
         }, function (e) {
 
             return e[self.METHODS_MAP[method]];
-        }, true);
+        }, method);
+    };
+
+    /**
+     * get style name
+     */
+    Attribute._getStyleName = function (style) {
+
+        var frag = style.split('-'),
+            i = 0,
+            first = true,
+            res = '';
+
+        while (i < frag.length) {
+            if (frag[i]) {
+                if (first) {
+                    res += frag[i];
+                    first = false;
+                } else {
+                    res += frag[i][0].toUpperCase() + frag[i].substr(1);
+                }
+            }
+            ++i;
+        }
+
+        return res;
+    };
+
+    /**
+     * get multi style
+     */
+    Attribute._getMultiStyle = function (str) {
+
+        if (str.indexOf(':') !== -1) {
+            var ss = str.split(';'),
+                i = ss.length,
+                pair, style = [];
+            while (i--) {
+                if (ss[i]) {
+                    pair = ss[i].split(':');
+                    style.push(this._getStyleName(pair[0]).trim());
+                    style.push(pair[1].trim());
+                }
+            }
+            return style;
+        } else {
+            return null;
+        }
+    };
+
+    /**
+     * genera style method
+     */
+    Attribute._generaStyle = function () {
+
+        return this._method(function (e, key, value) {
+
+            var m = Attribute._getMultiStyle(key),
+                i = 0;
+
+            if (m) {
+                while (i < m.length) {
+                    e.style[m[i]] = m[i += 1];
+                    ++i;
+                }
+            } else {
+                if (value === undefined && window.$.method._isSyncStyle(key)) {
+                    return e.style[Attribute._getStyleName(key)];
+                } else {
+                    e.style[Attribute._getStyleName(key)] = value;
+                }
+            }
+        }, function (e, key) {
+
+            return e.style[key];
+        }, 'style');
     };
 
     /**
@@ -63,7 +139,7 @@
         }, function (e, key) {
 
             return e.getAttribute(key);
-        });
+        }, 'attr');
     };
 
     /**
@@ -82,6 +158,9 @@
 
         methods.push('attr');
         methods.push(Attribute._generaAttr());
+
+        methods.push('style');
+        methods.push(Attribute._generaStyle());
 
         return methods;
     })();

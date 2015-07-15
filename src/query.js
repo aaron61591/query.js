@@ -31,8 +31,6 @@
             if (!window.$.generator(query, selectors)) {
                 Query._initEls(query, selectors);
             }
-
-            Query._bindMethods(query);
         })();
 
         return query;
@@ -49,34 +47,7 @@
         } else {
             query.els = document.querySelectorAll.call(document, selectors);
 
-            this._bindMethods(query);
-
             window.$.cache.set(selectors, query.els);
-        }
-    };
-
-    /**
-     * bind static method to obj
-     */
-    Query._bindMethod = function (query, p) {
-
-        query[p] = function () {
-
-            return Query[p].apply(query, arguments);
-        };
-    };
-
-    /**
-     * bind static methods to obj
-     */
-    Query._bindMethods = function (query) {
-
-        for (var p in Query) {
-            if (Query.hasOwnProperty(p) &&
-                typeof Query[p] === 'function' &&
-                p[0] !== '_') {
-                Query._bindMethod(query, p);
-            }
         }
     };
 

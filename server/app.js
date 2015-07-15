@@ -24,7 +24,7 @@ var basePath = process.cwd();
 app.use(express.static(basePath));
 
 app.get('/', function (req, res) {
-    res.sendfile('example/index.html');
+    res.sendfile('index.html');
 });
 
 var port = process.env.PORT || 3000;

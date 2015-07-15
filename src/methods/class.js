@@ -14,7 +14,7 @@
         return function (className) {
 
             window.$.method._exec(this, function (e) {
-                if (!Class.getExistRegExp(className).test(e.className)) {
+                if (!Class._getExistRegExp(className).test(e.className)) {
                     e.className += e.className ? ' ' + className : className;
                 }
             });
@@ -32,7 +32,7 @@
 
             window.$.method._exec(this, function (e) {
 
-                e.className = e.className.replace(Class.getExistRegExp(className), ' ').trim();
+                e.className = e.className.replace(Class._getExistRegExp(className), ' ').trim();
             });
 
             this.promise.resolve();

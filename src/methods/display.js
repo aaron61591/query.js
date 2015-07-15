@@ -11,17 +11,11 @@
      */
     Display._getShow = function () {
 
-        return function () {
+        return function (display) {
 
             window.$.method._exec(this, function (e) {
 
-                var show = e.getAttribute('query-show');
-
-                if (show) {
-                    e.style.display = show;
-                } else {
-                    e.style.display = 'initial';
-                }
+                e.style.display = display || 'block';
             });
 
             this.promise.resolve();
@@ -40,8 +34,6 @@
                 if (e.style.display === 'none') {
                     return;
                 }
-
-                e.setAttribute('query-show', e.style.display);
                 e.style.display = 'none';
             });
 

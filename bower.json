@@ -4,7 +4,7 @@
     "authors": [
         "Aaron P. <haiyang.phy@alibaba-inc.com>"
     ],
-    "description": "dom operator for green browser",
+    "description": "Performing Batch DOM Operations for Green Browser",
     "main": "release/query.js",
     "license": "MIT",
     "homepage": "http://git.ucweb.local/pffe/query/tree/master",

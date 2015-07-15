@@ -52,8 +52,7 @@
         'text',
         'html',
         'value',
-        'class',
-        'style'
+        'class'
     ];
 
     /**
@@ -62,6 +61,17 @@
     Method.GETTERS_SINGLE = [
         'attr'
     ];
+
+    /**
+     * whether sync style
+     */
+    Method._isSyncStyle = function (style) {
+
+        if (style.indexOf(':') === -1) {
+            return true;
+        }
+        return false;
+    };
 
     /**
      * is synchronization
@@ -73,6 +83,10 @@
         }
 
         if (args.length === 1 && this.GETTERS_SINGLE.indexOf(name) !== -1) {
+            return true;
+        }
+
+        if (name === 'style' && args && args.length === 1 && this._isSyncStyle(args[0])) {
             return true;
         }
     };
@@ -111,13 +125,13 @@
     /**
      * push method
      */
-    Method.setup = function (query) {
+    Method.setup = function (Query) {
 
         var methods = this._getMethods(),
             i = 0;
 
         while (i < methods.length) {
-            query[methods[i]] = this._convert(methods[i], methods[i += 1]);
+            Query.prototype[methods[i]] = this._convert(methods[i], methods[i += 1]);
             ++i;
         }
     };
