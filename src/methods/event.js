@@ -2,47 +2,36 @@
     'use strict';
 
     /**
-     * class event
-     */
-    function Event() {}
-
-    /**
      * on event
      */
-    Event._getOn = function () {
+    function on(query, args) {
 
-        return function (eventName, fun, useCapture) {
+        window.$.method._exec(query, function (e) {
 
-            window.$.method._exec(this, function (e) {
+            e.addEventListener(args[0], args[1], args[2]);
+        });
 
-                e.addEventListener(eventName, fun, useCapture);
-            });
-
-            this.promise.resolve();
-        };
-    };
+        query.promise.resolve();
+    }
 
     /**
      * off event
      */
-    Event._getOff = function () {
+    function off(query, args) {
 
-        return function (eventName, fun, useCapture) {
+        window.$.method._exec(query, function (e) {
 
-            window.$.method._exec(this, function (e) {
+            e.addEventListener(args[0], args[1], args[2]);
+        });
 
-                e.addEventListener(eventName, fun, useCapture);
-            });
-
-            this.promise.resolve();
-        };
-    };
+        query.promise.resolve();
+    }
 
     /**
      * setup methods
      */
     window.$.method.event = [
-        'on', Event._getOn(),
-        'off', Event._getOff()
+        'on', on,
+        'off', off
     ];
 })();

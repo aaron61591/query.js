@@ -15,7 +15,9 @@
         'class',
         'display',
         'event',
-        'time'
+        'time',
+        'search',
+        'style'
     ];
 
     /**
@@ -78,6 +80,10 @@
      */
     Method._isSync = function (name, args) {
 
+        if (name === 'find' || name === 'get') {
+            return true;
+        }
+
         if (!args.length && this.GETTERS_EMPTY.indexOf(name) !== -1) {
             return true;
         }
@@ -102,11 +108,11 @@
                 args = arguments;
 
             if (Method._isSync(name, args)) {
-                return body.apply(self, args);
+                return body(self, args);
             } else {
                 this.promise.then(function () {
 
-                    body.apply(self, args);
+                    body(self, args);
                 });
 
                 return this;

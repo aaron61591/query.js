@@ -4,67 +4,53 @@
     var $ = window.$;
 
     /**
-     * class Node
-     */
-    function Node() {}
-
-    /**
      * append element
      */
-    Node._getAppend = function () {
+    function append(query, args) {
 
-        return function (querySon) {
+        $.method._exec(query, function (e) {
 
-            $.method._exec(this, function (e) {
+            e.appendChild(args[0].els[0]);
+        });
 
-                e.appendChild(querySon.els[0]);
-            });
+        $.cache.delete(query.selectors);
 
-            $.cache.delete(this.selectors);
-
-            this.promise.resolve();
-        };
-    };
-
-    /**
-     * clear children element
-     */
-    Node._getEmpty = function () {
-
-        return function () {
-
-            $.method._exec(this, function (e) {
-
-                e.innerHTML = '';
-            });
-
-            $.cache.clear();
-
-            this.promise.resolve();
-        };
-    };
+        query.promise.resolve();
+    }
 
     /**
      * insert node into dom tree
      */
-    Node._getInsert = function () {
+    function insert(query, args) {
 
-        return function (sonNode, refSelectors) {
+        query.els[0].insertBefore(args[0].els[0], document.querySelector(args[1]));
 
-            this.els[0].insertBefore(sonNode.els[0], document.querySelector(refSelectors));
+        $.cache.clear();
 
-            $.cache.clear();
+        query.promise.resolve();
+    }
 
-            this.promise.resolve();
-        };
-    };
+    /**
+     * clear children element
+     */
+    function empty(query) {
+
+        $.method._exec(query, function (e) {
+
+            e.innerHTML = '';
+        });
+
+        $.cache.clear();
+
+        query.promise.resolve();
+    }
 
     /**
      * add methods
      */
     $.method.node = [
-        'append', Node._getAppend(),
-        'empty', Node._getEmpty(),
-        'insert', Node._getInsert()
+        'append', append,
+        'empty', empty,
+        'insert', insert
     ];
 })();

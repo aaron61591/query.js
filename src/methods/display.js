@@ -2,50 +2,39 @@
     'use strict';
 
     /**
-     * class display
-     */
-    function Display() {}
-
-    /**
      * show element
      */
-    Display._getShow = function () {
+    function show(query, args) {
 
-        return function (display) {
+        window.$.method._exec(query, function (e) {
 
-            window.$.method._exec(this, function (e) {
+            e.style.display = args[0] || 'block';
+        });
 
-                e.style.display = display || 'block';
-            });
-
-            this.promise.resolve();
-        };
-    };
+        query.promise.resolve();
+    }
 
     /**
      * hide element
      */
-    Display._getHide = function () {
+    function hide(query) {
 
-        return function () {
+        window.$.method._exec(query, function (e) {
 
-            window.$.method._exec(this, function (e) {
+            if (e.style.display === 'none') {
+                return;
+            }
+            e.style.display = 'none';
+        });
 
-                if (e.style.display === 'none') {
-                    return;
-                }
-                e.style.display = 'none';
-            });
-
-            this.promise.resolve();
-        };
-    };
+        query.promise.resolve();
+    }
 
     /**
      * add method
      */
     window.$.method.display = [
-        'show', Display._getShow(),
-        'hide', Display._getHide()
+        'show', show,
+        'hide', hide
     ];
 })();

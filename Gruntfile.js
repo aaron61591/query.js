@@ -58,7 +58,10 @@ module.exports = function (grunt) {
                 files: [
                     'src/**/*'
                 ],
-                tasks: ['uglify']
+                tasks: ['uglify'],
+                options: {
+                    livereload: true
+                }
             }
         },
         copy: {

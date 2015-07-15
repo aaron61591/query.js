@@ -45,6 +45,7 @@ body {
 }
 
 footer {
+    display: none;
     margin-top: 200px;
     font-size: 20px;
     line-height: 50px;
@@ -52,7 +53,6 @@ footer {
     height: 50px;
     text-align: center;
     text-decoration: underline;
-    display: none;
 }
 
 #welcome p.author {
@@ -149,6 +149,11 @@ footer {
 
 #code img {
     width: 280px;
+}
+
+#btn {
+    text-align: center;
+    margin-top: 250px;
 }
 
 #code {

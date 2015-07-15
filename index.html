@@ -17,22 +17,21 @@
             Lightweight Batch DOM Operations
             <br>for <span class="green">Green Browser</span>
         </p>
-        <!-- <p class="author">by Aaron P.</p> -->
     </section>
     <section id="quick-start">
         <div id="head">
             <p>QUICKY DEMO</p>
             <p id="msg-detail">Ball Game Develop</p>
         </div>
-        <p>
-            <button id="burn">Burn</button>
-        </p>
+    </section>
+    <section id="btn">
+        <button id="burn">Burn</button>
     </section>
     <section id="demo"></section>
     <section id="code">
-        <img src="code.png">
+        <img src="images/code.png">
     </section>
-    <footer>more</footer>
+    <footer>More</footer>
     <script type="text/javascript" src="release/query-0.2.1.js"></script>
     <!-- <script type="text/javascript" src="src/query.js"></script>
     <script type="text/javascript" src="src/promise.js"></script>
@@ -44,10 +43,14 @@
     <script type="text/javascript" src="src/methods/class.js"></script>
     <script type="text/javascript" src="src/methods/display.js"></script>
     <script type="text/javascript" src="src/methods/event.js"></script>
+    <script type="text/javascript" src="src/methods/search.js"></script>
     <script type="text/javascript" src="src/methods/time.js"></script>
+    <script type="text/javascript" src="src/methods/style.js"></script>
     <script type="text/javascript" src="src/init.js"></script> -->
     <script type="text/javascript">
     'use strict';
+
+    var lock = false;
 
     $('#welcome').on('touchstart', start);
 
@@ -72,28 +75,40 @@
             .show('inline-block')
             .on('touchstart', function() {
 
-                $('#quick-start').hide();
+                if (!lock) {
+                    lock = true;
+                    $('#btn').hide();
+                    $('#code')
+                        .style('-webkit-transform:translateY(-220px);');
+                    $('footer')
+                        .show()
+                        .on('touchstart', more);
 
-                var left = $('<button id="left">L</button>')
-                    .addClass('notice')
-                    .on('touchstart', handleLeft);
+                    $('#quick-start').hide();
 
-                var right = $('<button id="right">R</button>')
-                    .addClass('notice')
-                    .on('touchstart', handleRight);
-
-                $('#demo')
-                    .append($('<div id="ball" style="width:150px;"></div>'))
-                    .append(left)
-                    .append(right);
+                    startGame();
+                }
             });
 
         $('#code')
-            .style('-webkit-transform:translateY(-220px);opacity:1;');
+            .style('-webkit-transform:translateY(-350px);opacity:1;');
+    }
 
-        $('footer')
-            .show()
-            .on('touchstart', more);
+    function startGame() {
+
+        var left = $('<button id="left">L</button>')
+            .on('touchstart', handleLeft)
+            .delay(1000)
+            .addClass('notice');
+
+        var right = $('<button id="right">R</button>')
+            .on('touchstart', handleRight)
+            .addClass('notice');
+
+        $('#demo')
+            .insert($('<div id="ball" style="width:150px;">'))
+            .insert(left)
+            .insert(right);
     }
 
     function handleLeft() {
