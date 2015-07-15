@@ -1,17 +1,18 @@
 {
-    "name": "query",
-    "version": "0.2.1",
-    "authors": [
-        "Aaron P. <haiyang.phy@alibaba-inc.com>"
-    ],
-    "description": "Performing Batch DOM Operations for Green Browser",
-    "main": "release/query.js",
-    "license": "MIT",
-    "homepage": "http://git.ucweb.local/pffe/query/tree/master",
-    "dependencies": {},
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components"
-    ]
+  "name": "query",
+  "version": "0.2.1",
+  "authors": [
+    "Aaron P. <haiyang.phy@alibaba-inc.com>"
+  ],
+  "description": "Lightweight Batch DOM Operations Library for Green Browser",
+  "main": "release/query.js",
+  "license": "MIT",
+  "homepage": "http://git.ucweb.local/pffe/query/tree/master",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
 }
