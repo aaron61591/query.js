@@ -21,15 +21,15 @@
         /**
          * query promise
          */
-        query.promise = new window.$.Promise();
+        query.promise = new $.Promise();
 
         /**
          * initialize Query
          */
         (function () {
 
-            if (!window.$.generator(query, selectors)) {
-                Query._initEls(query, selectors);
+            if (!$.generator.init(query, selectors)) {
+                query._initEls(query, selectors);
             }
         })();
 
@@ -39,22 +39,22 @@
     /**
      * query all funciton
      */
-    Query._initEls = function (query, selectors) {
+    Query.prototype._initEls = function (query, selectors) {
 
-        var els = window.$.cache.get(selectors);
+        var els = $.cache.get(selectors);
         if (els) {
             query.els = els;
         } else {
             query.els = document.querySelectorAll.call(document, selectors);
 
-            window.$.cache.set(selectors, query.els);
+            $.cache.set(selectors, query.els);
         }
     };
 
     /**
      * define entry of QueryJs
      */
-    window.$ = function (selectors) {
+    var $ = window.$ = function (selectors) {
 
         return new Query(selectors);
     };
@@ -62,8 +62,8 @@
     /**
      * genera method
      */
-    window.$.init = function () {
+    $.init = function () {
 
-        window.$.method.setup(Query);
+        $.method.setup(Query);
     };
 })();

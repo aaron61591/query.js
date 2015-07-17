@@ -1,14 +1,9 @@
 (function () {
 
     /**
-     * class method
-     */
-    function Method() {}
-
-    /**
      * methods list
      */
-    Method.list = [
+    var list = [
         'attribute',
         'node',
         'class',
@@ -20,36 +15,24 @@
     ];
 
     /**
-     * exec query function
-     */
-    Method._exec = function (query, fun) {
-
-        var i = 0;
-        while (i < query.els.length) {
-            fun.call(query, query.els[i]);
-            ++i;
-        }
-    };
-
-    /**
      * get methods all
      */
-    Method._getMethods = function () {
+    function _getMethods() {
 
-        var i = this.list.length,
+        var i = list.length,
             methods = [];
 
         while (i--) {
-            methods = methods.concat(this[this.list[i]]);
+            methods = methods.concat(window.$.method[list[i]]);
         }
 
         return methods;
-    };
+    }
 
     /**
      * getter method
      */
-    Method.GETTERS_EMPTY = [
+    var GETTERS_EMPTY = [
         'text',
         'html',
         'value',
@@ -59,54 +42,44 @@
     /**
      * getter method
      */
-    Method.GETTERS_SINGLE = [
+    var GETTERS_SINGLE = [
         'attr'
     ];
 
     /**
-     * whether sync style
-     */
-    Method._isSyncStyle = function (style) {
-
-        if (style.indexOf(':') === -1) {
-            return true;
-        }
-        return false;
-    };
-
-    /**
      * is synchronization
      */
-    Method._isSync = function (name, args) {
+    function _isSync(name, args) {
 
         if (name === 'find' || name === 'get') {
             return true;
         }
 
-        if (!args.length && this.GETTERS_EMPTY.indexOf(name) !== -1) {
+        if (!args.length && GETTERS_EMPTY.indexOf(name) !== -1) {
             return true;
         }
 
-        if (args.length === 1 && this.GETTERS_SINGLE.indexOf(name) !== -1) {
+        if (args.length === 1 && GETTERS_SINGLE.indexOf(name) !== -1) {
             return true;
         }
 
-        if (name === 'style' && args && args.length === 1 && this._isSyncStyle(args[0])) {
+        if (name === 'style' && args && args.length === 1 &&
+            window.$.method.style.isSync(args[0])) {
             return true;
         }
-    };
+    }
 
     /**
      * get methods all
      */
-    Method._convert = function (name, body) {
+    function _convert(name, body) {
 
         return function () {
 
             var self = this,
                 args = arguments;
 
-            if (Method._isSync(name, args)) {
+            if (_isSync(name, args)) {
                 return body(self, args);
             } else {
                 this.promise.then(function () {
@@ -117,29 +90,42 @@
                 return this;
             }
         };
-    };
+    }
 
-    /**
-     * push method
-     */
-    Method.push = function (fun) {
+    window.$.method = {
 
-        this.list.push(fun);
-    };
+        /**
+         * push method
+         */
+        push: function (fun) {
 
-    /**
-     * push method
-     */
-    Method.setup = function (Query) {
+            list.push(fun);
+        },
 
-        var methods = this._getMethods(),
-            i = 0;
+        /**
+         * push method
+         */
+        setup: function (Query) {
 
-        while (i < methods.length) {
-            Query.prototype[methods[i]] = this._convert(methods[i], methods[i += 1]);
-            ++i;
+            var methods = _getMethods(),
+                i = 0;
+
+            while (i < methods.length) {
+                Query.prototype[methods[i]] = _convert(methods[i], methods[i += 1]);
+                ++i;
+            }
+        },
+
+        /**
+         * exec query function
+         */
+        exec: function (query, fun) {
+
+            var i = 0;
+            while (i < query.els.length) {
+                fun.call(query, query.els[i]);
+                ++i;
+            }
         }
     };
-
-    window.$.method = Method;
 })();

@@ -1,5 +1,7 @@
 (function () {
 
+    var m = window.$.method;
+
     /**
      * set or get element style
      */
@@ -7,23 +9,16 @@
 
         var key = args[0],
             value = args[1];
+
         if (value !== undefined ||
-            value === undefined && !window.$.method._isSyncStyle(key)) {
-            window.$.method._exec(query, function (e) {
-                var m = _getMultiStyle(key),
-                    i = 0;
+            value === undefined && !isSync(key)) {
+            m.exec(query, function (e) {
+                var m = _getMulti(key);
 
                 if (m) {
-                    while (i < m.length) {
-                        e.style[m[i]] = m[i += 1];
-                        ++i;
-                    }
+                    _handleMulti(e, m);
                 } else {
-                    if (value === undefined && window.$.method._isSyncStyle(key)) {
-                        return e.style[_getStyleName(key)];
-                    } else {
-                        e.style[_getStyleName(key)] = value;
-                    }
+                    _handleSingle(e, key, value);
                 }
             });
             query.promise.resolve();
@@ -33,11 +28,34 @@
         }
     }
 
+    /**
+     * handle multi args
+     */
+    function _handleMulti(e, m) {
+
+        var i = 0;
+        while (i < m.length) {
+            e.style[m[i]] = m[i += 1];
+            ++i;
+        }
+    }
+
+    /**
+     * handle single args
+     */
+    function _handleSingle(e, key, value) {
+
+        if (value === undefined && isSync(key)) {
+            return e.style[_getName(key)];
+        } else {
+            e.style[_getName(key)] = value;
+        }
+    }
 
     /**
      * get style name
      */
-    function _getStyleName(style) {
+    function _getName(style) {
 
         var frag = style.split('-'),
             i = 0,
@@ -62,7 +80,7 @@
     /**
      * get multi style
      */
-    function _getMultiStyle(str) {
+    function _getMulti(str) {
 
         if (str.indexOf(':') !== -1) {
             var ss = str.split(';'),
@@ -71,7 +89,7 @@
             while (i--) {
                 if (ss[i]) {
                     pair = ss[i].split(':');
-                    style.push(_getStyleName(pair[0]).trim());
+                    style.push(_getName(pair[0]).trim());
                     style.push(pair[1].trim());
                 }
             }
@@ -81,7 +99,20 @@
         }
     }
 
-    window.$.method.style = [
+    /**
+     * whether sync style
+     */
+    function isSync(style) {
+
+        if (style.indexOf(':') === -1) {
+            return true;
+        }
+        return false;
+    }
+
+    m.style = [
         'style', style
     ];
+
+    m.style.isSync = isSync;
 })();

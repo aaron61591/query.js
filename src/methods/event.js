@@ -1,11 +1,13 @@
 (function () {
 
+    var m = window.$.method;
+
     /**
      * on event
      */
     function on(query, args) {
 
-        window.$.method._exec(query, function (e) {
+        m.exec(query, function (e) {
 
             e.addEventListener(args[0], args[1], args[2]);
         });
@@ -18,9 +20,9 @@
      */
     function off(query, args) {
 
-        window.$.method._exec(query, function (e) {
+        m.exec(query, function (e) {
 
-            e.addEventListener(args[0], args[1], args[2]);
+            e.removeEventListener(args[0], args[1], args[2]);
         });
 
         query.promise.resolve();
@@ -29,7 +31,7 @@
     /**
      * setup methods
      */
-    window.$.method.event = [
+    m.event = [
         'on', on,
         'off', off
     ];

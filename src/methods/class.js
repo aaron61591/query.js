@@ -1,12 +1,14 @@
 (function () {
 
+    var m = window.$.method;
+
     /**
      * add class to elements
      */
     function addClass(query, args) {
 
-        window.$.method._exec(query, function (e) {
-            if (!_getExistRegExp(args[0]).test(e.className)) {
+        m.exec(query, function (e) {
+            if (!_existRegExp(args[0]).test(e.className)) {
                 e.className += e.className ? ' ' + args[0] : args[0];
             }
         });
@@ -19,9 +21,9 @@
      */
     function removeClass(query, args) {
 
-        window.$.method._exec(query, function (e) {
+        m.exec(query, function (e) {
 
-            e.className = e.className.replace(_getExistRegExp(args[0]), ' ').trim();
+            e.className = e.className.replace(_existRegExp(args[0]), ' ').trim();
         });
 
         query.promise.resolve();
@@ -31,7 +33,7 @@
     /**
      * exist regexp
      */
-    function _getExistRegExp(className) {
+    function _existRegExp(className) {
 
         var exp = '^' + className + '$|^' + className + '\\s|\\s' + className + '\\s|\\s' + className + '$';
 
@@ -41,7 +43,7 @@
     /**
      * setup methods
      */
-    window.$.method.class = [
+    m.class = [
         'addClass', addClass,
         'removeClass', removeClass
     ];

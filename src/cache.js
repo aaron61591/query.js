@@ -1,46 +1,42 @@
 (function () {
 
     /**
-     * class cache
-     */
-    function Cache() {}
-
-    /**
      * cache data
      */
-    Cache.data = {};
+    var data = {};
 
-    /**
-     * get query
-     */
-    Cache.get = function (selectors) {
+    window.$.cache = {
 
-        return this.data[selectors];
+        /**
+         * get query
+         */
+        get: function (selectors) {
+
+            return data[selectors];
+        },
+
+        /**
+         * set query
+         */
+        set: function (selectors, query) {
+
+            data[selectors] = query;
+        },
+
+        /**
+         * delete query
+         */
+        delete: function (selectors) {
+
+            data[selectors] = null;
+        },
+
+        /**
+         * clear all data
+         */
+        clear: function () {
+
+            data = {};
+        }
     };
-
-    /**
-     * set query
-     */
-    Cache.set = function (selectors, query) {
-
-        this.data[selectors] = query;
-    };
-
-    /**
-     * delete query
-     */
-    Cache.delete = function (selectors) {
-
-        this.data[selectors] = null;
-    };
-
-    /**
-     * clear all data
-     */
-    Cache.clear = function () {
-
-        this.data = {};
-    };
-
-    window.$.cache = Cache;
 })();

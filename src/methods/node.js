@@ -1,18 +1,19 @@
 (function () {
 
-    var $ = window.$;
+    var m = window.$.method,
+        c = window.$.cache;
 
     /**
      * append element
      */
     function append(query, args) {
 
-        $.method._exec(query, function (e) {
+        m.exec(query, function (e) {
 
             e.appendChild(args[0].els[0]);
         });
 
-        $.cache.delete(query.selectors);
+        c.delete(query.selectors);
 
         query.promise.resolve();
     }
@@ -24,7 +25,7 @@
 
         query.els[0].insertBefore(args[0].els[0], document.querySelector(args[1]));
 
-        $.cache.clear();
+        c.clear();
 
         query.promise.resolve();
     }
@@ -34,12 +35,12 @@
      */
     function empty(query) {
 
-        $.method._exec(query, function (e) {
+        m.exec(query, function (e) {
 
             e.innerHTML = '';
         });
 
-        $.cache.clear();
+        c.clear();
 
         query.promise.resolve();
     }
@@ -47,7 +48,7 @@
     /**
      * add methods
      */
-    $.method.node = [
+    m.node = [
         'append', append,
         'empty', empty,
         'insert', insert

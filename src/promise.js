@@ -13,7 +13,7 @@
         /**
          * then handler
          */
-        this._thenHandler = [];
+        this._thens = [];
     }
 
     /**
@@ -21,7 +21,7 @@
      */
     Promise.prototype.resolve = function () {
 
-        var method = this._thenHandler.shift();
+        var method = this._thens.shift();
 
         this.state = 1;
 
@@ -39,7 +39,7 @@
             this.state = 0;
             cb();
         } else {
-            this._thenHandler.push(cb);
+            this._thens.push(cb);
         }
     };
 

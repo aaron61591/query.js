@@ -1,11 +1,13 @@
 (function () {
 
+    var m = window.$.method;
+
     /**
      * show element
      */
     function show(query, args) {
 
-        window.$.method._exec(query, function (e) {
+        m.exec(query, function (e) {
 
             e.style.display = args[0] || 'block';
         });
@@ -18,11 +20,8 @@
      */
     function hide(query) {
 
-        window.$.method._exec(query, function (e) {
+        m.exec(query, function (e) {
 
-            if (e.style.display === 'none') {
-                return;
-            }
             e.style.display = 'none';
         });
 
@@ -32,7 +31,7 @@
     /**
      * add method
      */
-    window.$.method.display = [
+    m.display = [
         'show', show,
         'hide', hide
     ];
