@@ -25,7 +25,7 @@
         </div>
     </section>
     <section id="btn">
-        <button id="burn">Burn</button>
+        <button id="burn">GO</button>
     </section>
     <section id="demo"></section>
     <section id="code">
@@ -50,48 +50,53 @@
     <script type="text/javascript">
     'use strict';
 
-    var lock = false;
+    var lock = false,
+        startLock = false;
 
     $('#welcome').on('touchstart', start);
 
     function start() {
 
-        $('#welcome')
-            .style('opacity', 0)
-            .delay(500)
-            .hide();
+        if (!startLock) {
+            startLock = true;
 
-        $('#quick-start')
-            .style('-webkit-transform', 'translateY(40px)');
+            $('#welcome')
+                .style('opacity', 0)
+                .delay(500)
+                .hide();
 
-        $('#head')
-            .style('margin:40px 0;font-size:20px;');
+            $('#quick-start')
+                .style('-webkit-transform', 'translateY(40px)');
 
-        $('#msg-detail')
-            .show();
+            $('#head')
+                .style('margin:40px 0;font-size:20px;');
 
-        $('#burn')
-            .style('font-size:18px;background:#fff;width:140px;height:45px')
-            .show('inline-block')
-            .on('touchstart', function() {
+            $('#msg-detail')
+                .show();
 
-                if (!lock) {
-                    lock = true;
-                    $('#btn').hide();
-                    $('#code')
-                        .style('-webkit-transform:translateY(-220px);');
-                    $('footer')
-                        .show()
-                        .on('touchstart', more);
+            $('#burn')
+                .style('font-size:18px;background:#fff;width:140px;height:45px')
+                .show('inline-block')
+                .on('touchstart', function() {
 
-                    $('#quick-start').hide();
+                    if (!lock) {
+                        lock = true;
+                        $('#btn').hide();
+                        $('#code')
+                            .style('-webkit-transform:translateY(-220px);');
+                        $('footer')
+                            .show()
+                            .on('touchstart', more);
 
-                    startGame();
-                }
-            });
+                        $('#quick-start').hide();
 
-        $('#code')
-            .style('-webkit-transform:translateY(-350px);opacity:1;');
+                        startGame();
+                    }
+                });
+
+            $('#code')
+                .style('-webkit-transform:translateY(-350px);opacity:1;');
+        }
     }
 
     function startGame() {

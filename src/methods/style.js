@@ -1,5 +1,4 @@
 (function () {
-    'use strict';
 
     /**
      * set or get element style

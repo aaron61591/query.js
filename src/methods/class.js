@@ -1,5 +1,4 @@
 (function () {
-    'use strict';
 
     /**
      * add class to elements

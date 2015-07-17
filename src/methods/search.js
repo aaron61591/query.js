@@ -1,5 +1,4 @@
 (function () {
-    'use strict';
 
     /**
      * find element list
