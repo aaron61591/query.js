@@ -21,6 +21,6 @@
     "devel": true,
     "jquery": true,
     "node": true,
-    "predef": ["seajs", "define", "Vue"],
+    "predef": [],
     "white": false
 }
