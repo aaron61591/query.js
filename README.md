@@ -138,7 +138,7 @@ Remove all children from the specified elements
 
 Remove a children from the specified elements
 
-	$('#test').remove($('#test #son1')); // query
+	$('#test').remove($('#son')); // query
 	
 ### query.find()
 
