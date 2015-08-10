@@ -1,7 +1,7 @@
 <img width="100"src="http://image.uc.cn/s/uae/g/01/phy3/images/QJ.jpg?v=0.0.1">
 # Query.Js
 
-QueryJs is an lightweight(5.8k) batch DOM operations library for Green Browser.
+QueryJs is an lightweight(4.8k) batch DOM operations library for Green Browser.
 
 ## Quick Start
 
