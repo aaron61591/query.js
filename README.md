@@ -133,6 +133,12 @@ Inserts the specified elements before a reference selectors
 Remove all children from the specified elements
 
 	$('#test').empty() // query
+
+### query.remove()
+
+Remove a children from the specified elements
+
+	$('#test').remove($('#test #son1')); // query
 	
 ### query.find()
 
