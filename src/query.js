@@ -47,7 +47,9 @@
         } else {
             query.els = document.querySelectorAll.call(document, selectors);
 
-            $.cache.set(selectors, query.els);
+            if (query.els && query.els.length) {
+                $.cache.set(selectors, query.els);
+            }
         }
     };
 
