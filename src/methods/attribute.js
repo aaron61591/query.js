@@ -37,13 +37,12 @@
      */
     function _generaMethod(method) {
 
-        var self = this;
         return _method(function (e, key) {
 
-            e[self.METHODS[method]] = key;
+            e[METHODS[method]] = key;
         }, function (e) {
 
-            return e[self.METHODS[method]];
+            return e[METHODS[method]];
         }, method);
     }
 
@@ -70,6 +69,7 @@
 
         for (var name in METHODS) {
             if (METHODS.hasOwnProperty(name)) {
+                console.log(name, _generaMethod(name));
                 methods.push(name);
                 methods.push(_generaMethod(name));
             }
