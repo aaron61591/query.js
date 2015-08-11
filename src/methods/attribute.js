@@ -69,7 +69,6 @@
 
         for (var name in METHODS) {
             if (METHODS.hasOwnProperty(name)) {
-                console.log(name, _generaMethod(name));
                 methods.push(name);
                 methods.push(_generaMethod(name));
             }

@@ -110,8 +110,6 @@
             var methods = _getMethods(),
                 i = 0;
 
-            console.log(methods);
-
             while (i < methods.length) {
                 Query.prototype[methods[i]] = _convert(methods[i], methods[i += 1]);
                 ++i;
