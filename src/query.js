@@ -11,7 +11,7 @@
         /**
          * selectors of this query
          */
-        query.selectors = selectors;
+        query.selectors = '';
 
         /**
          * element list
@@ -26,12 +26,12 @@
         /**
          * initialize Query
          */
-        (function () {
-
-            if (!$.generator.init(query, selectors)) {
-                query._initEls(query, selectors);
-            }
-        })();
+        if (typeof selectors === 'object') {
+            query.els.push(selectors);
+        } else if (!$.generator.init(query, selectors)) {
+            query.selectors = selectors;
+            query._initEls(query, selectors);
+        }
 
         return query;
     }

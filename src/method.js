@@ -11,7 +11,8 @@
         'event',
         'time',
         'search',
-        'style'
+        'style',
+        'func'
     ];
 
     /**
@@ -123,7 +124,7 @@
 
             var i = 0;
             while (i < query.els.length) {
-                fun.call(query, query.els[i]);
+                fun.call(query, query.els[i], i);
                 ++i;
             }
         }

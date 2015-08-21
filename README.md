@@ -152,6 +152,23 @@ Get element
 
 	$('#test').get() // <div id="test"></div>
 	
+### query.exec(fun)
+
+Execuse function one times
+
+	$('#test').exec(function() {
+		console.log('hello ');
+	}) // query
+
+	
+### query.each(fun)
+
+Execused function by every child
+
+	$('#test li').exec(function(q, i) {
+		q.text('this is number ' + i);
+	}) // query
+	
 ### query.delay(time)
 
 Executes next query function after a specified delay.
