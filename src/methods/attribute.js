@@ -6,7 +6,7 @@
      * get or set methods map
      */
     var METHODS = {
-        text: 'innerText',
+        text: 'textContent',
         html: 'innerHTML',
         value: 'value',
         class: 'className'
