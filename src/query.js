@@ -28,9 +28,12 @@
          */
         if (typeof selectors === 'object') {
             query.els.push(selectors);
-        } else if (!$.generator.init(query, selectors)) {
-            query.selectors = selectors;
-            query._initEls(query, selectors);
+        } else if (typeof selectors === 'string') {
+            selectors = selectors.trim();
+            if (!$.generator.init(query, selectors)) {
+                query.selectors = selectors;
+                query._initEls(query, selectors);
+            }
         }
 
         return query;
