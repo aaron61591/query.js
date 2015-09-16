@@ -1,6 +1,7 @@
 (function () {
 
-    var m = window.$.method;
+    var m = window.$.method,
+        c = window.$.cache;
 
     /**
      * add class to elements
@@ -12,6 +13,8 @@
                 e.className += e.className ? ' ' + args[0] : args[0];
             }
         });
+
+        c.clear();
 
         query.promise.resolve();
     }
@@ -25,6 +28,8 @@
 
             e.className = e.className.replace(_existRegExp(args[0]), ' ').trim();
         });
+
+        c.clear();
 
         query.promise.resolve();
     }
