@@ -140,6 +140,10 @@ Remove a children from the specified elements
 
 	$('#test').remove($('#son')); // query
 	
+Remove specified elements from its father
+
+	$('#son').remove; // query
+	
 ### query.find()
 
 Get elements

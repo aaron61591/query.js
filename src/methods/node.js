@@ -51,8 +51,13 @@
     function remove(query, args) {
 
         m.exec(query, function (e) {
-
-            e.removeChild(args[0].els[0]);
+            if (args[0]) {
+                Array.prototype.forEach.call(args[0].els, function (s) {
+                    e.removeChild(s);
+                });
+            } else {
+                e.parentNode.removeChild(e);
+            }
         });
 
         c.clear();
