@@ -2,6 +2,10 @@ module.exports = function (grunt) {
     'use strict';
 
     grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+        meta: {
+            banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */'
+        },
         jshint: {
             all: [
                 'src/**/*.js'
@@ -70,6 +74,17 @@ module.exports = function (grunt) {
                 dest: 'release/query-' + grunt.file.readJSON('package.json').version + '.js'
             }
         },
+        // 给 md5 的静态文件添加 banner
+        usebanner: {
+            md5: {
+                options: {
+                    banner: '<%= meta.banner %>',
+                },
+                files: {
+                    src: ['dist/*']
+                }
+            }
+        },
     });
 
     grunt.loadNpmTasks('grunt-contrib-copy');
@@ -77,7 +92,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-express-server');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-banner');
 
     grunt.registerTask('default', ['jshint', 'uglify', 'express:dev', 'watch']);
-    grunt.registerTask('release', ['copy']);
+    grunt.registerTask('release', ['usebanner', 'copy']);
 };
