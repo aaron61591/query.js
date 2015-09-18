@@ -33,10 +33,10 @@
      */
     function _handleMulti(e, m) {
 
-        var i = 0;
-        while (i < m.length) {
-            e.style[m[i]] = m[i += 1];
-            ++i;
+        var i = m.length - 1;
+        while (i > 0) {
+            e.style[m[i - 1]] = m[i];
+            i -= 2;
         }
     }
 
