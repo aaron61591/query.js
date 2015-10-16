@@ -26,10 +26,10 @@
         /**
          * delete query
          */
-        delete: function (selectors) {
+        // delete: function (selectors) {
 
-            data[selectors] = null;
-        },
+        //     data[selectors] = null;
+        // },
 
         /**
          * clear all data

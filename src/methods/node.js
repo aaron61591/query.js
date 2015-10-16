@@ -13,7 +13,7 @@
             e.appendChild(args[0].els[0]);
         });
 
-        c.delete(query.selectors);
+        c.clear();
 
         query.promise.resolve();
     }

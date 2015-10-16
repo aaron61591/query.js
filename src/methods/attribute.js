@@ -1,6 +1,7 @@
 (function () {
 
-    var m = window.$.method;
+    var m = window.$.method,
+        c = window.$.cache;
 
     /**
      * get or set methods map
@@ -22,7 +23,6 @@
             if (method !== 'attr' && args[0] !== undefined ||
                 method === 'attr' && args[1] !== undefined) {
                 m.exec(query, function (e) {
-
                     setter(e, args[0], args[1]);
                 });
                 query.promise.resolve();
@@ -38,7 +38,9 @@
     function _generaMethod(method) {
 
         return _method(function (e, key) {
-
+            if (method === 'html') {
+                c.clear();
+            }
             e[METHODS[method]] = key;
         }, function (e) {
 
