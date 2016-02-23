@@ -4,6 +4,23 @@
         c = window.$.cache;
 
     /**
+     * Check the element if it has the `class`
+     * @param  {Query}   query
+     * @param  {String}  args  Class string
+     * @return {Boolean}       If the element has the `class`
+     */
+    function hasClass(query, args) {
+        var clsArr = (args[0] || '').split(/\s+/),
+            i = 0;
+        for (; i < clsArr.length; i++) {
+            if (clsArr[i].trim() && !_existRegExp(clsArr[i]).test(query.els[0].className)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * add class to elements
      */
     function addClass(query, args) {
@@ -40,15 +57,14 @@
      */
     function _existRegExp(className) {
 
-        var exp = '^' + className + '$|^' + className + '\\s|\\s' + className + '\\s|\\s' + className + '$';
-
-        return new RegExp(exp);
+        return new RegExp('\\b' + className.trim() + '\\b');
     }
 
     /**
      * setup methods
      */
     m.class = [
+        'hasClass', hasClass,
         'addClass', addClass,
         'removeClass', removeClass
     ];

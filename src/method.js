@@ -44,6 +44,7 @@
      * getter method
      */
     var GETTERS_SINGLE = [
+        'hasClass',
         'attr'
     ];
 
