@@ -79,6 +79,12 @@ Operate class
 	$('.test').class() // test
 	$('#test').class('test') // query
 	
+### query.hasClass(classes)
+
+Check the element if it has the `classes`
+
+	$('#test').hasClass('class1 class2') // boolean: true or false
+	
 ### query.addClass(class)
 
 Add class to element
