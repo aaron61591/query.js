@@ -85,12 +85,17 @@
         if (str.indexOf(':') !== -1) {
             var ss = str.split(';'),
                 i = ss.length,
-                pair, style = [];
+                // pair,
+                style = [];
             while (i--) {
                 if (ss[i]) {
-                    pair = ss[i].split(':');
-                    style.push(_getName(pair[0]).trim());
-                    style.push(pair[1].trim());
+                    var firstColonIndex = ss[i].indexOf(':');
+                    style.push(_getName(ss[i].substr(0, firstColonIndex)).trim());
+                    style.push(ss[i].substr(firstColonIndex + 1, ss[i].length - 1).trim());
+                    // pair = ss[i].split(':');
+                    // style.push(_getName(pair[0]).trim());
+                    // style.push(pair[1].trim());
+                    // fixed 2016 3 17 by Aaron Peng
                 }
             }
             return style;
