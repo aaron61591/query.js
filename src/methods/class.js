@@ -57,7 +57,7 @@
      */
     function _existRegExp(className) {
 
-        return new RegExp('\\b' + className.trim() + '\\b');
+        return new RegExp('(^|\\s)' + className.trim() + '(\\s|$)');
     }
 
     /**
