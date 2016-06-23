@@ -10,17 +10,20 @@
         /**
          * get query
          */
-        get: function (selectors) {
+        // get: function (selectors) {
+        get: function () {
 
-            return data[selectors];
+            // return data[selectors];
+            return null;
         },
 
         /**
          * set query
          */
-        set: function (selectors, query) {
+        // set: function (selectors, query) {
+        set: function () {
 
-            data[selectors] = query;
+            // data[selectors] = query;
         },
 
         /**
