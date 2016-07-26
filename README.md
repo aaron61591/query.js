@@ -175,7 +175,7 @@ Execuse function one times
 
 Execused function by every child
 
-	$('#test li').exec(function(q, i) {
+	$('#test li').each(function(q, i) {
 		q.text('this is number ' + i);
 	}) // query
 	
